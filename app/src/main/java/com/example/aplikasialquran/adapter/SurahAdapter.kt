@@ -14,9 +14,9 @@ import com.example.aplikasialquran.model.ModelSurah
 class SurahAdapter(
     private val mContext: Context,
     private val items: List<ModelSurah>,
-    private val onSelectData : OnSelectData
+    private val onSelectData: onSelectedData
 ) : RecyclerView.Adapter<SurahAdapter.ViewHolder>() {
-    interface OnSelectData {
+    interface onSelectedData {
         fun onSelected(modelSurah: ModelSurah?)
     }
 

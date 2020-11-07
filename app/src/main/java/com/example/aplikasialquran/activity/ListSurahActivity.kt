@@ -8,7 +8,6 @@ import android.content.pm.PackageManager
 import android.location.Geocoder
 import android.location.Location
 import androidx.appcompat.app.AppCompatActivity
-import com.example.aplikasialquran.adapter.SurahAdapter.onSelectData
 import android.os.Bundle
 import android.os.Handler
 import android.os.ResultReceiver
@@ -35,7 +34,7 @@ import org.json.JSONException
 import java.util.*
 
 @Suppress("DEPRECATION")
-class ListSurahActivity : AppCompatActivity(), SurahAdapter.onSelectData {
+class ListSurahActivity : AppCompatActivity(), SurahAdapter.onSelectedData {
 
     var surahAdapter: SurahAdapter? = null
     var progressDialog: ProgressDialog? = null
@@ -137,7 +136,7 @@ class ListSurahActivity : AppCompatActivity(), SurahAdapter.onSelectData {
         rvSurah!!.adapter = surahAdapter
     }
 
-    override fun onSelected(modelSurah: ModelSurah) {
+    override fun onSelected(modelSurah: ModelSurah?) {
         val intent = Intent(this@ListSurahActivity, DetailSurahActivity::class.java)
         intent.putExtra("detailSurah", modelSurah)
         startActivity(intent)
