@@ -1,7 +1,6 @@
 package com.example.aplikasialquran.adapter
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,14 +8,14 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.aplikasialquran.R
+import com.example.aplikasialquran.activity.ListSurahActivity
 import com.example.aplikasialquran.model.ModelSurah
 
 class SurahAdapter(
-    private val mContext: Context,
     private val items: List<ModelSurah>,
-    private val onSelectData: onSelectedData
-) : RecyclerView.Adapter<SurahAdapter.ViewHolder>() {
-    interface onSelectedData {
+    private val onSelectData: OnSelectedData
+) : RecyclerView.Adapter<SurahAdapter.ViewHolder>(){
+    interface OnSelectedData {
         fun onSelected(modelSurah: ModelSurah?)
     }
 
@@ -41,18 +40,12 @@ class SurahAdapter(
 
     //Class Holder
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var cvSurah: CardView
-        var txtNumber: TextView
-        var txtAyat: TextView
-        var txtInfo: TextView
-        var txtName: TextView
+        var cvSurah: CardView = itemView.findViewById(R.id.cvSurah)
+        var txtNumber: TextView = itemView.findViewById(R.id.txtNumber)
+        var txtAyat: TextView = itemView.findViewById(R.id.txtAyat)
+        var txtInfo: TextView = itemView.findViewById(R.id.txtInfo)
+        var txtName: TextView = itemView.findViewById(R.id.txtName)
 
-        init {
-            cvSurah = itemView.findViewById(R.id.cvSurah)
-            txtNumber = itemView.findViewById(R.id.txtNumber)
-            txtAyat = itemView.findViewById(R.id.txtAyat)
-            txtInfo = itemView.findViewById(R.id.txtInfo)
-            txtName = itemView.findViewById(R.id.txtName)
-        }
     }
+
 }

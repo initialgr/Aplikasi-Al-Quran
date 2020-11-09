@@ -1,6 +1,5 @@
 package com.example.aplikasialquran.adapter
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,8 +9,7 @@ import com.example.aplikasialquran.R
 import com.example.aplikasialquran.model.ModelAyat
 
 
-class AyatAdapter(private val mContext: Context,
-                  private val items: List<ModelAyat>) : RecyclerView.Adapter<AyatAdapter.ViewHolder>() {
+class AyatAdapter(private val items: List<ModelAyat>) : RecyclerView.Adapter<AyatAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val v = LayoutInflater.from(parent.context).inflate(R.layout.list_item_ayat, parent, false)
         return ViewHolder(v)
@@ -30,14 +28,9 @@ class AyatAdapter(private val mContext: Context,
 
     //Class Holder
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var tvNomorAyat: TextView
-        var tvArabic: TextView
-        var tvTerjemahan: TextView
+        var tvNomorAyat: TextView = itemView.findViewById(R.id.tvNomorAyat)
+        var tvArabic: TextView = itemView.findViewById(R.id.tvArabic)
+        var tvTerjemahan: TextView = itemView.findViewById(R.id.tvTerjemahan)
 
-        init {
-            tvNomorAyat = itemView.findViewById(R.id.tvNomorAyat)
-            tvArabic = itemView.findViewById(R.id.tvArabic)
-            tvTerjemahan = itemView.findViewById(R.id.tvTerjemahan)
-        }
     }
 }

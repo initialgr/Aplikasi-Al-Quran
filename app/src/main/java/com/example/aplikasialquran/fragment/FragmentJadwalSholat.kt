@@ -1,5 +1,6 @@
 package com.example.aplikasialquran.fragment
 
+import android.annotation.SuppressLint
 import android.app.ProgressDialog
 import android.graphics.Color
 import android.os.Bundle
@@ -97,6 +98,7 @@ class FragmentJadwalSholat : BottomSheetDialogFragment() {
         return v
     }
 
+    @SuppressLint("SimpleDateFormat")
     private fun loadJadwal(id: Int?) {
         try {
             progressDialog!!.show()

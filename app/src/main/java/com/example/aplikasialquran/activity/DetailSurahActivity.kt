@@ -19,6 +19,7 @@ import com.androidnetworking.AndroidNetworking
 import com.androidnetworking.common.Priority
 import com.androidnetworking.error.ANError
 import com.androidnetworking.interfaces.JSONArrayRequestListener
+import com.example.aplikasialquran.BuildConfig
 import com.example.aplikasialquran.R
 import com.example.aplikasialquran.adapter.AyatAdapter
 import com.example.aplikasialquran.model.ModelAyat
@@ -32,28 +33,30 @@ import java.util.ArrayList
 
 class DetailSurahActivity : AppCompatActivity() {
 
-    var nomor: String? = null
-    var nama: String? = null
-    var arti: String? = null
-    var type: String? = null
-    var ayat: String? = null
-    var keterangan: String? = null
-    var audio: String? = null
-    var modelSurah: ModelSurah? = null
-    var ayatAdapter: AyatAdapter? = null
+    private var nomor: String? = null
+    private var nama: String? = null
+    private var arti: String? = null
+    private var type: String? = null
+    private var ayat: String? = null
+    private var keterangan: String? = null
+    private var audio: String? = null
+    private var modelSurah: ModelSurah? = null
+    private var ayatAdapter: AyatAdapter? = null
     var progressDialog: ProgressDialog? = null
     var modelAyat: MutableList<ModelAyat> = ArrayList()
-    var mHandler: Handler? = null
+    private var mHandler: Handler? = null
 
-    @SuppressLint("RestrictedApi")
+    @SuppressLint("RestrictedApi", "SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_surah)
 
         //set toolbar
-        toolbar_detail.setTitle(null)
+        toolbar_detail.title = null
         setSupportActionBar(toolbar_detail)
-        assert(supportActionBar != null)
+        if (BuildConfig.DEBUG && supportActionBar == null) {
+            error("Assertion failed")
+        }
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
         mHandler = Handler()
@@ -69,25 +72,26 @@ class DetailSurahActivity : AppCompatActivity() {
             audio = modelSurah!!.audio
             keterangan = modelSurah!!.keterangan
 
-            fabStop.setVisibility(View.GONE)
-            fabPlay.setVisibility(View.VISIBLE)
+            fabStop.visibility = View.GONE
+            fabPlay.visibility = View.VISIBLE
 
             //Set text
-            tvHeader.setText(nama)
-            tvTitle.setText(nama)
-            tvSubTitle.setText(arti)
-            tvInfo.setText("$type - $ayat Ayat ")
+            tvHeader.text = nama
+            tvTitle.text = nama
+            tvSubTitle.text = arti
+            tvInfo.text = "$type - $ayat Ayat "
 
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) tvKet.setText(
-                Html.fromHtml(keterangan,
-                Html.FROM_HTML_MODE_COMPACT))
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) tvKet.text = Html.fromHtml(
+                keterangan,
+                Html.FROM_HTML_MODE_COMPACT
+            )
             else {
-                tvKet.setText(Html.fromHtml(keterangan))
+                tvKet.text = Html.fromHtml(keterangan)
             }
 
             //get & play Audio
             val mediaPlayer = MediaPlayer()
-            fabPlay.setOnClickListener(View.OnClickListener {
+            fabPlay.setOnClickListener {
                 try {
                     mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC)
                     mediaPlayer.setDataSource(audio)
@@ -96,16 +100,16 @@ class DetailSurahActivity : AppCompatActivity() {
                 } catch (e: IOException) {
                     e.printStackTrace()
                 }
-                fabPlay.setVisibility(View.GONE)
-                fabStop.setVisibility(View.VISIBLE)
-            })
+                fabPlay.visibility = View.GONE
+                fabStop.visibility = View.VISIBLE
+            }
 
-            fabStop.setOnClickListener(View.OnClickListener {
+            fabStop.setOnClickListener {
                 mediaPlayer.stop()
                 mediaPlayer.reset()
-                fabPlay.setVisibility(View.VISIBLE)
-                fabStop.setVisibility(View.GONE)
-            })
+                fabPlay.visibility = View.VISIBLE
+                fabStop.visibility = View.GONE
+            }
         }
 
         progressDialog = ProgressDialog(this)
@@ -113,7 +117,7 @@ class DetailSurahActivity : AppCompatActivity() {
         progressDialog!!.setCancelable(false)
         progressDialog!!.setMessage("Sedang menampilkan data...")
 
-        rvAyat.setLayoutManager(LinearLayoutManager(this))
+        rvAyat.layoutManager = LinearLayoutManager(this)
         rvAyat.setHasFixedSize(true)
 
         //Methods get data
@@ -155,7 +159,7 @@ class DetailSurahActivity : AppCompatActivity() {
     }
 
     private fun showListAyat() {
-        ayatAdapter = AyatAdapter(this@DetailSurahActivity, modelAyat)
+        ayatAdapter = AyatAdapter(modelAyat)
         rvAyat!!.adapter = ayatAdapter
     }
 

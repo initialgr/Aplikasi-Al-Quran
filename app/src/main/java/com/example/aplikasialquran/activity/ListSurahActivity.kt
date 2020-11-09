@@ -34,13 +34,13 @@ import org.json.JSONException
 import java.util.*
 
 @Suppress("DEPRECATION")
-class ListSurahActivity : AppCompatActivity(), SurahAdapter.onSelectedData {
+class ListSurahActivity : AppCompatActivity(), SurahAdapter.OnSelectedData {
 
-    var surahAdapter: SurahAdapter? = null
+    private var surahAdapter: SurahAdapter? = null
     var progressDialog: ProgressDialog? = null
     var modelSurah: MutableList<ModelSurah> = ArrayList()
-    var hariIni: String? = null
-    var tanggal: String? = null
+    private var hariIni: String? = null
+    private var tanggal: String? = null
     private var fusedLocationClient: FusedLocationProviderClient? = null
     private var addressResultReceiver: LocationAddressResultReceiver? = null
     private var currentLocation: Location? = null
@@ -50,6 +50,8 @@ class ListSurahActivity : AppCompatActivity(), SurahAdapter.onSelectedData {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list_surah)
+
+        supportActionBar?.hide()
 
         progressDialog = ProgressDialog(this)
         progressDialog!!.setTitle("Mohon Tunggu")
@@ -61,19 +63,19 @@ class ListSurahActivity : AppCompatActivity(), SurahAdapter.onSelectedData {
         val dateNow = Calendar.getInstance().time
         hariIni = DateFormat.format("EEEE", dateNow) as String
         tanggal = DateFormat.format("d MMMM yyyy", dateNow) as String
-        tvToday.setText("$hariIni,")
-        tvDate.setText(tanggal)
+        tvToday.text = "$hariIni,"
+        tvDate.text = tanggal
 
         val sendDetail = newInstance("detail")
-        llTime.setOnClickListener(View.OnClickListener {
+        llTime.setOnClickListener {
             sendDetail.show(supportFragmentManager, sendDetail.tag)
 //            startActivity(new Intent(MainActivity.this, FragmentMenu.class));
-        })
+        }
 
-//        llMosque.setOnClickListener(View.OnClickListener {
-//            startActivity(Intent(this@ListSurahActivity, MasjidActivity::class.java))
-//        })
-        rvSurah.setLayoutManager(LinearLayoutManager(this))
+//        llMosque.setOnClickListener {
+//            startActivity(Intent(this@ListSurahActivity, SearchSurahActivity::class.java))
+//        }
+        rvSurah.layoutManager = LinearLayoutManager(this)
         rvSurah.setHasFixedSize(true)
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
@@ -88,6 +90,7 @@ class ListSurahActivity : AppCompatActivity(), SurahAdapter.onSelectedData {
         //Methods get data
         listSurah()
     }
+
 
     private fun listSurah() {
         progressDialog!!.show()
@@ -132,12 +135,12 @@ class ListSurahActivity : AppCompatActivity(), SurahAdapter.onSelectedData {
     }
 
     private fun showListSurah() {
-        surahAdapter = SurahAdapter(this@ListSurahActivity, modelSurah, this)
+        surahAdapter = SurahAdapter( modelSurah, this)
         rvSurah!!.adapter = surahAdapter
     }
 
     override fun onSelected(modelSurah: ModelSurah?) {
-        val intent = Intent(this@ListSurahActivity, DetailSurahActivity::class.java)
+        val intent = Intent(this, DetailSurahActivity::class.java)
         intent.putExtra("detailSurah", modelSurah)
         startActivity(intent)
     }
@@ -183,7 +186,7 @@ class ListSurahActivity : AppCompatActivity(), SurahAdapter.onSelectedData {
         grantResults: IntArray
     ) {
         if (requestCode == LOCATION_PERMISSION_REQUEST_CODE) {
-            if (grantResults.size > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 startLocationUpdates()
             } else {
                 Toast.makeText(this, "Location permission not granted", Toast.LENGTH_SHORT).show()
@@ -226,4 +229,6 @@ class ListSurahActivity : AppCompatActivity(), SurahAdapter.onSelectedData {
     companion object {
         private const val LOCATION_PERMISSION_REQUEST_CODE = 2
     }
+
+
 }

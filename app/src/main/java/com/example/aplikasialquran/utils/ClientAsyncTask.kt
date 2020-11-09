@@ -13,7 +13,7 @@ import java.net.URL
 @Suppress("DEPRECATION")
 class ClientAsyncTask(private val mContext: FragmentJadwalSholat,
                       postExecuteListener: OnPostExecuteListener) : AsyncTask<String, String, String>() {
-    val CONNECTON_TIMEOUT_MILLISECONDS = 60000
+    private val CONNECTON_TIMEOUT_MILLISECONDS = 60000
     private val mPostExecuteListener: OnPostExecuteListener = postExecuteListener
 
     interface OnPostExecuteListener {
@@ -35,21 +35,17 @@ class ClientAsyncTask(private val mContext: FragmentJadwalSholat,
             urlConnection.connectTimeout = CONNECTON_TIMEOUT_MILLISECONDS
             urlConnection.readTimeout = CONNECTON_TIMEOUT_MILLISECONDS
 
-            val inString = streamToString(urlConnection.inputStream)
-
-            return inString
+            return streamToString(urlConnection.inputStream)
         } catch (ex: Exception) {
 
         } finally {
-            if (urlConnection != null) {
-                urlConnection.disconnect()
-            }
+            urlConnection?.disconnect()
         }
 
         return ""
     }
 
-    fun streamToString(inputStream: InputStream): String {
+    private fun streamToString(inputStream: InputStream): String {
 
         val bufferReader = BufferedReader(InputStreamReader(inputStream))
         var line: String
