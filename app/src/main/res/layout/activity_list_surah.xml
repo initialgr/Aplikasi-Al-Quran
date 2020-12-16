@@ -177,7 +177,7 @@
                         android:background="@drawable/bg_circle"
                         android:backgroundTint="@android:color/white"
                         android:padding="8dp"
-                        android:src="@drawable/ic_mosque"
+                        android:src="@drawable/ic_notepad"
                         app:tint="@color/colorPrimaryDark" />
 
                 </LinearLayout>

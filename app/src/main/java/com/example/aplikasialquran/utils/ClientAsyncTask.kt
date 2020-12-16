@@ -3,7 +3,7 @@
 package com.example.aplikasialquran.utils
 
 import android.os.AsyncTask
-import com.example.aplikasialquran.fragment.FragmentJadwalSholat
+import com.example.aplikasialquran.fragments.FragmentJadwalSholat
 import java.io.BufferedReader
 import java.io.InputStream
 import java.io.InputStreamReader

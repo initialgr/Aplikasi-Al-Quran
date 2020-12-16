@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="mSharedViewModel"
+            type="com.example.aplikasialquran.fragments.SharedViewModel" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/listLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".fragments.list.ListFragment">
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center_vertical|center|center_horizontal">
+
+            <ImageView
+                android:id="@+id/no_data_imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_no_data"
+                android:layout_gravity="center"
+                android:visibility="invisible"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/no_data_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:alpha="0.5"
+                android:gravity="center"
+                android:text="@string/no_data"
+                android:textSize="16sp"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:layout_marginTop="10dp"
+                android:visibility="invisible" />
+
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingTop="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:listitem="@layout/row_layout" />
+
+        <com.google.android.material.bottomappbar.BottomAppBar
+            android:id="@+id/navBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:backgroundTint="@color/colorPrimaryDark"
+            android:paddingBottom="5dp"
+            android:theme="@style/Theme.MaterialComponents"
+            app:fabAlignmentMode="center"
+            app:fabCradleMargin="10dp"
+            app:fabCradleRoundedCornerRadius="50dp"
+            app:hideOnScroll="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:id="@+id/llTime"
+                        android:layout_width="0.0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1.0"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+<!--                        <ImageView-->
+<!--                            android:layout_width="36dp"-->
+<!--                            android:layout_height="36dp"-->
+<!--                            android:background="@drawable/bg_circle"-->
+<!--                            android:backgroundTint="@android:color/white"-->
+<!--                            android:padding="8dp"-->
+<!--                            android:src="@drawable/ic_calendar"-->
+<!--                            app:tint="@color/colorPrimaryDark" />-->
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0.0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1.0"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:visibility="invisible" />
+
+                    <LinearLayout
+                        android:layout_width="0.0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1.0"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+<!--                        <ImageView-->
+<!--                            android:id="@+id/menu_delete_all"-->
+<!--                            android:layout_width="36dp"-->
+<!--                            android:layout_height="36dp"-->
+<!--                            android:background="@drawable/bg_circle"-->
+<!--                            android:backgroundTint="@android:color/white"-->
+<!--                            android:padding="8dp"-->
+<!--                            android:src="@drawable/ic_delete"-->
+<!--                            app:tint="@color/colorPrimaryDark" />-->
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </com.google.android.material.bottomappbar.BottomAppBar>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floatingActionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:elevation="4dp"
+            android:focusable="true"
+            android:navigateToAddFragment="@{true}"
+            android:src="@drawable/ic_add"
+            android:tint="@color/white"
+            app:layout_anchor="@+id/navBar"
+            tools:ignore="ContentDescription" />
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

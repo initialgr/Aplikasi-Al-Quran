@@ -12,7 +12,6 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.ResultReceiver
 import android.text.format.DateFormat
-import android.view.View
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -23,7 +22,7 @@ import com.androidnetworking.error.ANError
 import com.androidnetworking.interfaces.JSONArrayRequestListener
 import com.example.aplikasialquran.R
 import com.example.aplikasialquran.adapter.SurahAdapter
-import com.example.aplikasialquran.fragment.FragmentJadwalSholat.Companion.newInstance
+import com.example.aplikasialquran.fragments.FragmentJadwalSholat.Companion.newInstance
 import com.example.aplikasialquran.model.ModelSurah
 import com.example.aplikasialquran.networking.Api
 import com.example.aplikasialquran.utils.GetAddressIntentService
@@ -72,9 +71,9 @@ class ListSurahActivity : AppCompatActivity(), SurahAdapter.OnSelectedData {
 //            startActivity(new Intent(MainActivity.this, FragmentMenu.class));
         }
 
-//        llMosque.setOnClickListener {
-//            startActivity(Intent(this@ListSurahActivity, SearchSurahActivity::class.java))
-//        }
+        llMosque.setOnClickListener {
+            startActivity(Intent(this@ListSurahActivity, NoteActivity::class.java))
+        }
         rvSurah.layoutManager = LinearLayoutManager(this)
         rvSurah.setHasFixedSize(true)
 

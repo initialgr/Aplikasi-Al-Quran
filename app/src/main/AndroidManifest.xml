@@ -14,9 +14,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.DetailSurahActivity"
-            android:theme="@style/AppTheme2"/>
-        <activity android:name=".activity.ListSurahActivity"
+        <activity android:name=".activity.NoteActivity"></activity>
+        <activity
+            android:name=".activity.DetailSurahActivity"
+            android:theme="@style/AppTheme2" />
+        <activity
+            android:name=".activity.ListSurahActivity"
             android:theme="@style/AppTheme2">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
